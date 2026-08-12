@@ -1,7 +1,20 @@
 aid: eatstreet
 name: EatStreet
-description: 'EatStreet is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  EatStreet is a Madison, Wisconsin online food ordering and delivery marketplace,
+  founded in 2010, that connects diners with local restaurants for takeout and
+  delivery across US college towns and midsize metros, and sells restaurants an
+  ordering, menu and point-of-sale integration platform on the merchant side. It
+  once ran a documented public API — restaurant search, menus, order placement and
+  tracking, and user management — at api.eatstreet.com/publicapi/v1, documented at
+  developers.eatstreet.com. That surface is retired: the documentation host and
+  every documented v1 path now return 404, though the company GitHub organization
+  still points developers at the dead portal. What remains live is an OAuth 2.0
+  protected v2 API on the consumer host, whose only public, machine-readable
+  contract is the RFC 8414 authorization server metadata EatStreet serves at
+  /.well-known/oauth-authorization-server, advertising merchant_integration and
+  customer scopes with PKCE.
+image: https://eatstreet.com/apple-touch-icon.png
 url: https://raw.githubusercontent.com/api-evangelist/eatstreet/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
@@ -12,12 +25,112 @@ created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
-apis: []
+- Food Delivery
+- Restaurants
+- Online Ordering
+- Marketplace
+- Local Commerce
+- Consumer
+- Point of Sale
+- OAuth
+apis:
+- name: EatStreet API v2
+  description: >-
+    The live EatStreet API, served under https://eatstreet.com/api/v2 and protected
+    by OAuth 2.0 authorization code with PKCE. EatStreet publishes no reference,
+    no OpenAPI and no developer portal for it; the only public contract is the
+    RFC 8414 authorization server metadata, which names the authorize, token,
+    introspection and revocation endpoints and the three advertised scopes
+    (merchant_integration, customer, example). The router is live and answers
+    unauthenticated probes with structured JSON errors, but the resource path
+    space is undiscoverable without credentials.
+  humanURL: https://eatstreet.com/
+  baseURL: https://eatstreet.com/api/v2
+  tags:
+  - Online Ordering
+  - Restaurants
+  - OAuth
+  properties:
+  - type: Authentication
+    url: authentication/eatstreet-authentication.yml
+  - type: OAuthScopes
+    url: scopes/eatstreet-scopes.yml
+  - type: ErrorCatalog
+    url: errors/eatstreet-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/eatstreet-rate-limits.yml
+  - type: Conventions
+    url: conventions/eatstreet-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/eatstreet-lifecycle.yml
+  - type: Plans
+    url: plans/eatstreet-plans-pricing.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/eatstreet-domain-security.yml
 - type: Website
+  url: https://eatstreet.com/
+- type: SecondaryMarket
   url: https://forgeglobal.com/eatstreet_stock/
+- type: Support
+  url: https://help.eatstreet.com/
+- type: Blog
+  url: https://blog.eatstreet.com/
+- type: TermsOfService
+  url: https://eatstreet.com/terms
+- type: PrivacyPolicy
+  url: https://eatstreet.com/app/Legal.jsp
+- type: GitHubOrganization
+  url: https://github.com/eatstreet
+- type: WellKnown
+  url: well-known/eatstreet-well-known.yml
+- type: Authentication
+  url: authentication/eatstreet-authentication.yml
+- type: OAuthScopes
+  url: scopes/eatstreet-scopes.yml
+- type: Conformance
+  url: conformance/eatstreet-conformance.yml
+- type: Conventions
+  url: conventions/eatstreet-conventions.yml
+- type: ErrorCatalog
+  url: errors/eatstreet-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/eatstreet-lifecycle.yml
+- type: Packages
+  url: packages/eatstreet-packages.yml
+- type: Plans
+  url: plans/eatstreet-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/eatstreet-rate-limits.yml
+- type: LLMsTxt
+  url: llms/eatstreet-llms.txt
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 14
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: no-machine-readable-spec
+  detail: >-
+    EatStreet still serves a real RFC 8414 OAuth authorization server metadata
+    document and JWKS on eatstreet.com, but its developer portal
+    developers.eatstreet.com returns 404 and every path of the documented v1
+    public API under api.eatstreet.com/publicapi now 404s, so the live v2 API has
+    no published reference and no OpenAPI, GraphQL SDL, AsyncAPI or MCP manifest
+    on any host.
+  evidence:
+  - url: https://eatstreet.com/.well-known/oauth-authorization-server
+    status: 200
+  - url: https://developers.eatstreet.com/
+    status: 404
+  - url: https://api.eatstreet.com/publicapi/v1
+    status: 404
+  - url: https://eatstreet.com/api/v2/oauth/token
+    status: 401
+  checked: '2026-08-12'

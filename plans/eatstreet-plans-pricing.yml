@@ -1,0 +1,30 @@
+generated: '2026-08-12'
+method: searched
+source: https://geteatstreet.com/
+name: EatStreet API plans and pricing
+description: >-
+  EatStreet publishes no pricing for API access. There is no developer portal to
+  price against — developers.eatstreet.com returns 404 — and the merchant site
+  geteatstreet.com is an Angular single-page app that serves a 2.2KB HTML shell
+  with no server-rendered pricing content and no sitemap. Consumer-side fees
+  (delivery and service fees) are quoted per order inside the ordering flow and
+  are not a developer plan. This is a recorded absence, not an unchecked field.
+plan_count: 0
+plans: []
+pricing_url: null
+notes: >-
+  Merchant commission and integration terms appear to be negotiated through the
+  merchant sales funnel at geteatstreet.com / go.geteatstreet.com rather than
+  published. The OAuth scope merchant_integration implies a partner tier exists
+  commercially, but no rate card, tier list or quota is public.
+x-evidence:
+  fetched: '2026-08-12'
+  urls:
+  - url: https://geteatstreet.com/
+    http_status: 200
+    note: 2,269-byte Angular shell; no readable pricing content.
+  - url: https://geteatstreet.com/sitemap.xml
+    http_status: 200
+    note: Returns the SPA shell, not a sitemap.
+  - url: https://developers.eatstreet.com/
+    http_status: 404

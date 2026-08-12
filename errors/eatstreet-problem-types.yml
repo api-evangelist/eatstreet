@@ -1,0 +1,64 @@
+generated: '2026-08-12'
+method: probed
+source: https://eatstreet.com/api/v2/
+name: EatStreet error catalog
+description: >-
+  EatStreet publishes no error reference and no OpenAPI, so this catalog is
+  built entirely from error responses observed on live unauthenticated probes of
+  the v2 API and its OAuth endpoints. It is therefore a partial catalog — only
+  the errors reachable without credentials are here. Nothing has been inferred
+  or invented; each entry carries the exact body that was returned.
+format: bespoke
+rfc9457: false
+envelopes:
+- id: routing_error
+  shape: '{"errorDetails": string, "error": boolean}'
+  content_type: application/json
+  note: Returned by the /api/v2 router for any path it does not recognise.
+- id: gateway_error
+  shape: '{"error": {"message": string, "code": integer}}'
+  content_type: application/json
+  note: >-
+    Returned on method rejection. The body `code` does not match the HTTP status
+    (405 on the wire, 400 in the body).
+- id: oauth_error
+  shape: '{"error": string, "error_description": string}'
+  content_type: application/json
+  note: RFC 6749 section 5.2 error object, used by the OAuth endpoints only.
+problems:
+- id: endpoint-not-found
+  http_status: 404
+  envelope: routing_error
+  title: Endpoint not found
+  observed_body: '{"errorDetails":"Endpoint </api/v2/restaurants> not found.","error":true}'
+  observed_at: https://eatstreet.com/api/v2/restaurants
+  remediation: >-
+    The v2 path space is undocumented. Only /api/v2/oauth/token,
+    /api/v2/oauth/introspect and /api/v2/oauth/revoke are discoverable, via the
+    authorization server metadata.
+- id: method-rejected
+  http_status: 405
+  envelope: gateway_error
+  title: This HTTP Method was rejected
+  observed_body: '{"error":{"message":"This HTTP Method was rejected","code":400}}'
+  observed_at: https://eatstreet.com/api/v2/oauth/token (GET)
+  remediation: Use POST for the OAuth token, introspection and revocation endpoints.
+- id: invalid_client
+  http_status: 401
+  envelope: oauth_error
+  title: invalid_client
+  observed_body: '{"error":"invalid_client","error_description":"client_id is missing"}'
+  observed_at: https://eatstreet.com/api/v2/oauth/token (POST)
+  remediation: >-
+    Authenticate the client with client_secret_basic or client_secret_post as
+    declared in token_endpoint_auth_methods_supported.
+gaps:
+- No published error reference; the full error taxonomy is not knowable without
+  credentials.
+- Two incompatible non-OAuth error envelopes are in use on the same API version.
+- No application/problem+json (RFC 9457) anywhere.
+x-evidence:
+  fetched: '2026-08-12'
+  urls:
+  - https://eatstreet.com/api/v2/restaurants
+  - https://eatstreet.com/api/v2/oauth/token

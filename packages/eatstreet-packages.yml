@@ -1,0 +1,58 @@
+generated: '2026-08-12'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=eatstreet
+name: EatStreet client packages
+description: >-
+  EatStreet publishes no first-party client library on any public registry. npm,
+  PyPI, RubyGems, Packagist, crates.io and the company's own GitHub organization
+  were all searched. The GitHub organization github.com/eatstreet holds 20 public
+  repositories, every one of which is a fork of third-party infrastructure
+  (Heroku buildpacks, RVM, Ansible roles, Docker Compose, Gecode, Egads,
+  ActionSheetPicker) — none is an EatStreet API SDK. The only registry package
+  that wraps the EatStreet API is a community wrapper for the now-retired v1
+  public API, last released in 2019.
+official_sdk_count: 0
+package_count: 1
+packages:
+- language: javascript
+  registry: npm
+  name: eatstreet
+  url: https://www.npmjs.com/package/eatstreet
+  repository: https://github.com/austinaryain/eatstreet
+  official: false
+  version: 0.0.3
+  published: '2019-10-03'
+  first_published: '2017-06-27'
+  wraps: EatStreet Public API v1 (https://api.eatstreet.com/publicapi/v1)
+  note: >-
+    Third-party community wrapper, not published by EatStreet. Its target API
+    was retired — every api.eatstreet.com/publicapi path now returns 404 — so
+    the package cannot function against the live surface. Recorded as a decay
+    signal, not as an SDK.
+registries_searched:
+- registry: npm
+  query: eatstreet
+  first_party_hits: 0
+- registry: pypi
+  query: eatstreet
+  http_status: 404
+  first_party_hits: 0
+- registry: rubygems
+  query: eatstreet
+  first_party_hits: 0
+- registry: packagist
+  query: eatstreet
+  first_party_hits: 0
+- registry: crates.io
+  query: eatstreet
+  first_party_hits: 0
+- registry: github
+  query: github.com/eatstreet (20 public repos)
+  first_party_hits: 0
+x-evidence:
+  fetched: '2026-08-12'
+  urls:
+  - https://registry.npmjs.org/eatstreet
+  - https://pypi.org/pypi/eatstreet/json
+  - https://rubygems.org/api/v1/search.json?query=eatstreet
+  - https://api.github.com/orgs/eatstreet/repos

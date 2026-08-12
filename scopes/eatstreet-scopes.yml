@@ -1,0 +1,37 @@
+generated: '2026-08-12'
+method: probed
+source: https://eatstreet.com/.well-known/oauth-authorization-server
+name: EatStreet OAuth scopes
+description: >-
+  The complete set of OAuth 2.0 scopes EatStreet advertises, read verbatim from
+  the scopes_supported array of its RFC 8414 Authorization Server Metadata
+  document. EatStreet publishes no scope reference page — the developer portal
+  is gone — so no description text is available for any scope and none has been
+  invented here. The names are the entire published record.
+authorization_server: https://eatstreet.com
+scope_count: 3
+scopes:
+- name: merchant_integration
+  description: null
+  note: >-
+    Name implies the restaurant/merchant-side integration surface (menus,
+    orders inbound to a merchant). No published definition exists.
+- name: customer
+  description: null
+  note: >-
+    Name implies the consumer-side surface (accounts, addresses, order
+    placement and tracking). No published definition exists.
+- name: example
+  description: null
+  note: >-
+    Advertised in scopes_supported alongside the two real scopes. Reads as a
+    placeholder or sample scope left in production metadata rather than a
+    functional grant.
+gaps:
+- No scope reference page is published; scopes_supported carries names only.
+- No per-scope operation mapping is possible — EatStreet publishes no OpenAPI.
+docs: null
+x-evidence:
+  fetched: '2026-08-12'
+  url: https://eatstreet.com/.well-known/oauth-authorization-server
+  http_status: 200

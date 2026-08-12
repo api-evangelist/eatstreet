@@ -1,0 +1,83 @@
+generated: '2026-08-12'
+method: probed
+source: https://eatstreet.com/api/v2/
+name: EatStreet API conventions
+description: >-
+  Cross-cutting runtime semantics for the live EatStreet v2 API. EatStreet
+  publishes no developer documentation, so every field below is either read from
+  the RFC 8414 authorization server metadata or observed on a live
+  unauthenticated response. Where nothing was observable the field is recorded
+  as unknown rather than guessed — an agent integrating here has the same
+  information gap.
+authentication:
+  style: oauth2
+  flow: authorization_code
+  pkce: S256
+  token_endpoint: https://eatstreet.com/api/v2/oauth/token
+  client_auth:
+  - client_secret_basic
+  - client_secret_post
+  detail: authentication/eatstreet-authentication.yml
+  scopes: scopes/eatstreet-scopes.yml
+versioning:
+  style: path
+  current: v2
+  base: https://eatstreet.com/api/v2
+  policy_published: false
+  detail: lifecycle/eatstreet-lifecycle.yml
+idempotency:
+  supported: unknown
+  header: null
+  note: >-
+    No idempotency key header is documented or observable without credentials.
+    No Idempotency pointer is emitted for this provider — the support was not
+    demonstrated.
+pagination:
+  style: unknown
+  note: Not observable without credentials; undocumented.
+field_expansion:
+  supported: unknown
+metadata:
+  supported: unknown
+request_id_tracing:
+  header: x-transaction-id
+  observed_on: https://eatstreet.com/.well-known/oauth-authorization-server
+  example_shape: 16-digit numeric identifier
+  note: >-
+    The edge returns an x-transaction-id response header on eatstreet.com
+    responses. It is undocumented, so whether it is a supportable correlation
+    handle is unknown.
+error_envelope:
+  format: bespoke
+  rfc9457: false
+  shapes:
+  - context: unrouted path under /api/v2
+    body: '{"errorDetails":"Endpoint </api/v2/foo> not found.","error":true}'
+  - context: rejected HTTP method
+    http_status: 405
+    body: '{"error":{"message":"This HTTP Method was rejected","code":400}}'
+    note: >-
+      The transport status (405) and the code carried in the body (400) disagree.
+  - context: OAuth token endpoint
+    http_status: 401
+    body: '{"error":"invalid_client","error_description":"client_id is missing"}'
+    note: RFC 6749 section 5.2 error shape, distinct from the two envelopes above.
+  detail: errors/eatstreet-problem-types.yml
+rate_limit_signaling:
+  headers_observed: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After headers were present on any
+    unauthenticated response observed. Nothing is documented.
+  detail: rate-limits/eatstreet-rate-limits.yml
+transport:
+  tls: true
+  hsts: true
+  hsts_max_age: 31536000
+  http2: true
+  detail: security/eatstreet-domain-security.yml
+x-evidence:
+  fetched: '2026-08-12'
+  urls:
+  - https://eatstreet.com/api/v2/oauth/token
+  - https://eatstreet.com/api/v2/restaurants
+  - https://eatstreet.com/.well-known/oauth-authorization-server

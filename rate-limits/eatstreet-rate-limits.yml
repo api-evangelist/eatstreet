@@ -1,0 +1,31 @@
+generated: '2026-08-12'
+method: probed
+source: https://eatstreet.com/api/v2/
+name: EatStreet API rate limits
+description: >-
+  EatStreet documents no rate limits — there is no developer documentation to
+  document them in. Live unauthenticated responses from the v2 API and its OAuth
+  endpoints carried no rate-limit signalling headers of any kind, so an agent has
+  neither a documented number nor a runtime signal to back off against. Recorded
+  as an honest zero.
+limit_count: 0
+limits: []
+headers:
+  observed: []
+  x_ratelimit_family: false
+  ratelimit_draft_family: false
+  retry_after: false
+exhaustion_status: unknown
+docs: null
+notes: >-
+  Response headers observed on https://eatstreet.com/.well-known/oauth-authorization-server
+  were date, content-type, content-length, server, content-security-policy,
+  set-cookie, x-transaction-id and strict-transport-security. No throttling
+  signal was present on any probed endpoint.
+x-evidence:
+  fetched: '2026-08-12'
+  urls:
+  - url: https://eatstreet.com/api/v2/oauth/token
+    http_status: 401
+  - url: https://eatstreet.com/.well-known/oauth-authorization-server
+    http_status: 200

@@ -1,0 +1,69 @@
+generated: '2026-08-12'
+method: probed
+source: https://developers.eatstreet.com/
+name: EatStreet API lifecycle
+description: >-
+  EatStreet operated a documented public API — the EatStreet Public API v1 at
+  api.eatstreet.com/publicapi/v1, documented at developers.eatstreet.com and
+  still referenced from the description of the company's GitHub organization.
+  Both the documentation host and every documented v1 path now return 404. The
+  live surface is an OAuth-protected v2 API on the consumer host, discoverable
+  only through the well-known authorization server metadata. No versioning
+  policy, deprecation policy, sunset schedule, SLA or status page is published
+  anywhere, so the v1 retirement was an unannounced removal as far as the
+  public record shows.
+versioning:
+  scheme: path
+  current_version: v2
+  current_base: https://eatstreet.com/api/v2
+  policy_published: false
+  policy_url: null
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header_rfc8594: unknown
+  note: >-
+    No deprecation or sunset policy is published. The v1 removal was observed by
+    probe, not announced on any public page reachable from the company's sites.
+retired:
+- name: EatStreet Public API v1
+  base: https://api.eatstreet.com/publicapi/v1
+  documentation: https://developers.eatstreet.com/
+  status: retired
+  evidence:
+  - url: https://developers.eatstreet.com/
+    http_status: 404
+  - url: https://api.eatstreet.com/publicapi/v1/restaurant
+    http_status: 404
+  - url: https://api.eatstreet.com/publicapi
+    http_status: 404
+  note: >-
+    The host api.eatstreet.com still answers 200 at / with the plain-text body
+    "Hello World" and an x-info "Root Handler" response header, but every
+    publicapi path underneath it returns 404. The GitHub organization
+    github.com/eatstreet still advertises "Build on EatStreet here
+    https://developers.eatstreet.com" against a dead host.
+status_page:
+  published: false
+  url: null
+  evidence:
+  - url: https://status.eatstreet.com/
+    http_status: 0
+    note: DNS does not resolve.
+sla:
+  published: false
+  url: null
+changelog:
+  published: false
+  url: null
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - url: https://developers.eatstreet.com/
+    http_status: 404
+  - url: https://api.eatstreet.com/
+    http_status: 200
+  - url: https://api.eatstreet.com/publicapi/v1
+    http_status: 404
+  - url: https://eatstreet.com/api/v2/oauth/token
+    http_status: 401

@@ -1,0 +1,92 @@
+generated: '2026-08-12'
+method: probed
+source: https://eatstreet.com/.well-known/oauth-authorization-server
+name: EatStreet standards conformance
+description: >-
+  Cross-cutting standards assertions for EatStreet. Every entry is decided from
+  something actually fetched — principally the RFC 8414 authorization server
+  metadata and live unauthenticated responses — not from marketing claims, which
+  EatStreet publishes none of for its API.
+conformance:
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: >-
+    https://eatstreet.com/.well-known/oauth-authorization-server returns 200
+    application/json with issuer, authorization_endpoint, token_endpoint,
+    jwks_uri, response_types_supported, grant_types_supported and
+    scopes_supported.
+- id: oauth2
+  name: OAuth 2.0 (RFC 6749)
+  conforms: true
+  evidence: >-
+    authorization_code grant with code/token response types; token endpoint
+    returns the RFC 6749 section 5.2 error body
+    {"error":"invalid_client","error_description":"client_id is missing"} on an
+    unauthenticated POST.
+- id: rfc7636
+  name: PKCE
+  conforms: true
+  evidence: code_challenge_methods_supported = ["plain","S256"].
+- id: rfc7662
+  name: OAuth 2.0 Token Introspection
+  conforms: true
+  evidence: >-
+    introspection_endpoint https://eatstreet.com/api/v2/oauth/introspect with
+    client_secret_basic / client_secret_post auth declared.
+- id: rfc7009
+  name: OAuth 2.0 Token Revocation
+  conforms: true
+  evidence: revocation_endpoint https://eatstreet.com/api/v2/oauth/revoke declared.
+- id: rfc7517
+  name: JSON Web Key Set
+  conforms: true
+  evidence: >-
+    jwks_uri https://eatstreet.com/.well-known/jwks.json returns 200 with a
+    keys[] array of RSA signing keys.
+- id: oidc
+  name: OpenID Connect Discovery
+  conforms: false
+  evidence: >-
+    /.well-known/openid-configuration returns the SPA HTML shell (soft 200); no
+    id_token, userinfo endpoint or OIDC scopes are advertised.
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: false
+  evidence: /.well-known/oauth-protected-resource returns the SPA HTML shell (soft 200).
+- id: rfc9727
+  name: API Catalog (.well-known/api-catalog)
+  conforms: false
+  evidence: /.well-known/api-catalog returns the SPA HTML shell (soft 200).
+- id: rfc9116
+  name: security.txt
+  conforms: false
+  evidence: /.well-known/security.txt returns the SPA HTML shell (soft 200); no RFC 9116 document is served.
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    Live error bodies use two bespoke envelopes —
+    {"errorDetails":"...","error":true} for unrouted paths and
+    {"error":{"message":"...","code":400}} for method rejection — neither is
+    application/problem+json.
+- id: openapi
+  name: OpenAPI
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document found on eatstreet.com, api.eatstreet.com or
+    geteatstreet.com; /openapi.json, /swagger.json, /api-docs, /api/v2/openapi.json
+    and /api/v2/api-docs all miss.
+- id: pci
+  name: PCI DSS
+  conforms: unknown
+  evidence: >-
+    EatStreet processes card payments in-product but publishes no trust center
+    or compliance page; trust.eatstreet.com does not resolve.
+certifications_published: []
+x-evidence:
+  fetched: '2026-08-12'
+  urls:
+  - https://eatstreet.com/.well-known/oauth-authorization-server
+  - https://eatstreet.com/.well-known/jwks.json
+  - https://eatstreet.com/api/v2/oauth/token

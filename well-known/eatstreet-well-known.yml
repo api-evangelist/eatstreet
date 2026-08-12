@@ -1,0 +1,99 @@
+generated: '2026-08-12'
+method: probed
+source: https://eatstreet.com/.well-known/
+name: EatStreet well-known probe
+description: >-
+  Probe of the RFC 8615 /.well-known/ namespace on every EatStreet host. The
+  consumer host eatstreet.com serves a real RFC 8414 OAuth 2.0 Authorization
+  Server Metadata document and the matching JWKS. Every other probed path on
+  that host returns the Angular single-page-app shell with HTTP 200 and
+  content-type text/html — a soft 200, not a document — so those are recorded
+  as misses. The API host api.eatstreet.com returns a plain-text "Not Found"
+  for every well-known path.
+hosts:
+- eatstreet.com
+- api.eatstreet.com
+probes:
+- host: eatstreet.com
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json;charset=UTF-8
+  hit: true
+  file: well-known/eatstreet-oauth-authorization-server.json
+  note: >-
+    Real RFC 8414 Authorization Server Metadata. Issuer https://eatstreet.com,
+    authorization_endpoint https://eatstreet.com/authorize, token/introspection/
+    revocation endpoints under https://eatstreet.com/api/v2/oauth/, PKCE S256
+    supported, scopes merchant_integration / customer / example.
+- host: eatstreet.com
+  path: /.well-known/jwks.json
+  status: 200
+  content_type: application/json
+  hit: true
+  file: well-known/eatstreet-jwks.json
+  note: JSON Web Key Set referenced by jwks_uri in the authorization server metadata.
+- host: eatstreet.com
+  path: /.well-known/security.txt
+  status: 200
+  content_type: text/html;charset=utf-8
+  hit: false
+  note: >-
+    Soft 200 — the SPA index shell is returned, not an RFC 9116 document. No
+    security.txt is served.
+- host: eatstreet.com
+  path: /.well-known/openid-configuration
+  status: 200
+  content_type: text/html;charset=utf-8
+  hit: false
+  note: Soft 200 SPA shell. No OpenID Provider metadata is served.
+- host: eatstreet.com
+  path: /.well-known/oauth-protected-resource
+  status: 200
+  content_type: text/html;charset=utf-8
+  hit: false
+  note: Soft 200 SPA shell. No RFC 9728 protected-resource metadata is served.
+- host: eatstreet.com
+  path: /.well-known/api-catalog
+  status: 200
+  content_type: text/html;charset=utf-8
+  hit: false
+  note: Soft 200 SPA shell. No RFC 9727 API catalog is served.
+- host: eatstreet.com
+  path: /.well-known/ai-plugin.json
+  status: 404
+  hit: false
+- host: eatstreet.com
+  path: /.well-known/agent-card.json
+  status: 404
+  hit: false
+- host: eatstreet.com
+  path: /.well-known/agent.json
+  status: 404
+  hit: false
+- host: api.eatstreet.com
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  hit: false
+- host: api.eatstreet.com
+  path: /.well-known/openid-configuration
+  status: 404
+  hit: false
+- host: api.eatstreet.com
+  path: /.well-known/agent-card.json
+  status: 404
+  hit: false
+- host: api.eatstreet.com
+  path: /.well-known/agent.json
+  status: 404
+  hit: false
+summary:
+  paths_probed: 13
+  hits: 2
+  soft_200_html_shells: 4
+  security_txt: false
+  openid_configuration: false
+  api_catalog: false
+  agent_card: false
+x-evidence:
+  fetched: '2026-08-12'
+  probe: HTTP GET, redirects followed, content-type and body shape verified

@@ -26,6 +26,16 @@ modified: '2026-08-12'
 tags:
 - Company
 - Food Delivery
+- Restaurant
+- Online Ordering
+- Marketplace
+- Local Commerce
+- Consumer
+- Point-of-Sale
+- Authentication
+tags_raw:
+- Company
+- Food Delivery
 - Restaurants
 - Online Ordering
 - Marketplace
@@ -47,6 +57,10 @@ apis:
   humanURL: https://eatstreet.com/
   baseURL: https://eatstreet.com/api/v2
   tags:
+  - Online Ordering
+  - Restaurant
+  - Authentication
+  tags_raw:
   - Online Ordering
   - Restaurants
   - OAuth

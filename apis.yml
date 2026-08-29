@@ -14,6 +14,17 @@ description: >-
   contract is the RFC 8414 authorization server metadata EatStreet serves at
   /.well-known/oauth-authorization-server, advertising merchant_integration and
   customer scopes with PKCE.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://eatstreet.com/apple-touch-icon.png
 url: https://raw.githubusercontent.com/api-evangelist/eatstreet/refs/heads/main/apis.yml
 x-type: company

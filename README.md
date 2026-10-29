@@ -64,5 +64,107 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-EatStreet is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/eatstreet_stock/
+EatStreet is a Madison, Wisconsin online food ordering and delivery marketplace, founded in 2010, that connects diners with local restaurants for takeout and delivery across US college towns and midsize metros, and sells restaurants an ordering, menu and point-of-sale integration platform on the merchant side. It once ran a documented public API — restaurant search, menus, order placement and tracking, and user management — at api.eatstreet.com/publicapi/v1, documented at developers.eatstreet.com. That surface is retired: the documentation host and every documented v1 path now return 404, though the company GitHub organization still points developers at the dead portal. What remains live is an OAuth 2.0 protected v2 API on the consumer host, whose only public, machine-readable contract is the RFC 8414 authorization server metadata EatStreet serves at /.well-known/oauth-authorization-server, advertising merchant_integration and customer scopes with PKCE.
+
+**Areas:** Company · Food Delivery · Restaurant · Online Ordering · Marketplace · Local Commerce · Consumer · Point-of-Sale · Authentication
+
+## EatStreet on APIs.io
+
+Everything profiled for EatStreet is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/eatstreet/](https://apis.io/providers/eatstreet/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [EatStreet API v2](https://apis.io/apis/eatstreet/eatstreet-api-v2/) — The live EatStreet API, served under https://eatstreet.com/api/v2 and protected by OAuth 2.0 authorization code with PKCE. EatStreet publishes no reference,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Eatstreet Authentication](https://apis.io/security/eatstreet/eatstreet-authentication/)
+- [Eatstreet Domain Security](https://apis.io/security/eatstreet/eatstreet-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Eatstreet Scopes](https://apis.io/scopes/eatstreet/eatstreet-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Eatstreet Plans Pricing](https://apis.io/plans/eatstreet/eatstreet-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Eatstreet Rate Limits](https://apis.io/rate-limits/eatstreet/eatstreet-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://eatstreet.com/)
+- [Support](https://help.eatstreet.com/)
+- [Blog](https://eatstreet.com/blog/)
+- [Terms of service](https://eatstreet.com/terms)
+- [Privacy policy](https://eatstreet.com/app/Legal.jsp)
+- [GitHub](https://github.com/eatstreet)
+
+## API Evangelist rating
+
+**Kin Score 19.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 14.3 |
+| Access clarity | 21.1 |
+
+**Agent readiness 7.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 34.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/eatstreet/](https://apis.io/providers/eatstreet/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for EatStreet: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/eatstreet/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
